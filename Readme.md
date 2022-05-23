@@ -1,7 +1,8 @@
 # Личный проект «Кэт энерджи»
 
 * Студент: [Елена Гаязова](https://up.htmlacademy.ru/adaptive/25/user/1439959).
-* Наставник: `Неизвестно`.
+* Наставник: [Михаил Кислый](https://github.com/smart-grizzly).
+БЭМ, Less, Flexbox
 
 ---
 
