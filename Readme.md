@@ -2,10 +2,10 @@
 
 * Студент: [Елена Гаязова](https://up.htmlacademy.ru/adaptive/25/user/1439959).
 * Наставник: [Михаил Кислый](https://github.com/smart-grizzly).
-БЭМ, Less, Flexbox
+
 
 ---
-
+БЭМ, Less, Flexbox
 **Обратите внимание, что папка с вашими исходными файлами — `source/`.**
 
 Полезный файл:
