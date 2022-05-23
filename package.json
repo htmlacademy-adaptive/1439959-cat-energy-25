@@ -1,25 +1,28 @@
 {
-  "name": "cat-energy-25",
-  "private": true,
-  "description": "Личный проект «Кэт энерджи» от HTML Academy",
+  "name": "template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "dependencies": {},
   "devDependencies": {
-    "@htmlacademy/editorconfig-cli": "1.0.0",
-    "stylelint": "13.13.1",
-    "stylelint-config-htmlacademy": "^0.1.11"
+    "autoprefixer": "^9.8.5",
+    "browser-sync": "^2.26.7",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-less": "^4.0.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-rename": "^2.0.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-uglify-es": "^2.0.0",
+    "postcss": "^7.0.32"
   },
   "scripts": {
-    "editorconfig": "editorconfig-cli",
-    "stylelint": "stylelint .",
-    "lint": "npm run editorconfig",
-    "build": "echo 'Build task'",
-    "start": "echo 'Start task'"
+    "start": "gulp less",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "editorconfig-cli": [
-    "*.json",
-    "source/*.html"
-  ],
-  "engines": {
-    "node": "^16"
-  },
-  "type": "module"
+  "author": "",
+  "license": "ISC"
 }
