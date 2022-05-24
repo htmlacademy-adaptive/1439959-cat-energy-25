@@ -1,45 +1,61 @@
-import gulp from 'gulp';
-import plumber from 'gulp-plumber';
-import less from 'gulp-less';
-import postcss from 'gulp-postcss';
-import autoprefixer from 'autoprefixer';
-import browser from 'browser-sync';
+let gulp = require('gulp'),
+    less = require('gulp-less'),
+    minify = require('gulp-clean-css'),
+    rename = require('gulp-rename'),
+    browserSync = require('browser-sync'),
+    uglify = require('gulp-uglify-es').default,
+    concat = require('gulp-concat'),
+    postcss = require('gulp-postcss'),
+    autoprefixer = require('autoprefixer'),
+    del = require('del');
 
-// Styles
+gulp.task('less', function () {
+    return gulp.src('less/style.less')
+        .pipe(less())
+        .pipe(postcss([
+            autoprefixer({ browsers: ['last 5 version'] })
+        ]))
+        .pipe(gulp.dest('css'))
+        .pipe(browserSync.reload({ stream: true }))
+});
+gulp.task('watch', function () {
+    gulp.watch(['less/**/*.less', 'less/*.less'], gulp.parallel('less'));
+    gulp.watch('*.html', gulp.parallel('html'));
+    gulp.watch('js/*.js', gulp.parallel('js'));
+})
 
-export const styles = () => {
-  return gulp.src('source/less/style.less', { sourcemaps: true })
-    .pipe(plumber())
-    .pipe(less())
-    .pipe(postcss([
-      autoprefixer()
-    ]))
-    .pipe(gulp.dest('source/css', { sourcemaps: '.' }))
-    .pipe(browser.stream());
-}
+gulp.task('html', function () {
+    return gulp.src('*.html')
+        .pipe(browserSync.reload({ stream: true }))
+})
 
-// Server
+gulp.task('js', function () {
+    return gulp.src('js/*.js')
+        .pipe(gulp.dest('js'))
+        .pipe(browserSync.reload({ stream: true }))
+})
 
-const server = (done) => {
-  browser.init({
-    server: {
-      baseDir: 'source'
-    },
-    cors: true,
-    notify: false,
-    ui: false,
-  });
-  done();
-}
+gulp.task('browser-sync', function () {
+    browserSync.init({
+        server: {
+            baseDir: "./"
+        }
+    });
+});
 
-// Watcher
+gulp.task('copy', function () {
+    gulp.src([
+        'css/*.min.css',
+        ['img/*.{png, svg, jpg}', 'img/**/*.{ png, svg, jpg } '],
+        'js/*.min.js',
+        '*.html'
+    ], {
+        base: 'template'
+    })
+        .pipe(gulp.dest('build'))
+})
 
-const watcher = () => {
-  gulp.watch('source/less/**/*.less', gulp.series(styles));
-  gulp.watch('source/*.html').on('change', browser.reload);
-}
-
-
-export default gulp.series(
-  styles, server, watcher
-);
+gulp.task('del', function () {
+    return del.sync(['css/*.css', 'js/libs.min.js'])
+})
+gulp.task('default', gulp.parallel('browser-sync', 'watch'))
